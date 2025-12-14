@@ -1,0 +1,34 @@
+<section class="hero">
+  <div class="hero-card">
+    <h1>Find your next flight</h1>
+    <p class="sub">Search by route and by airline.</p>
+
+    <form class="search" (ngSubmit)="search()" [formGroup]="form">
+      <div class="row">
+        <div class="field">
+          <label>From</label>
+          <input formControlName="fromPlace" placeholder="Bangalore" />
+        </div>
+
+        <div class="field">
+          <label>To</label>
+          <input formControlName="toPlace" placeholder="Delhi" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Airline </label>
+          <input formControlName="airline" placeholder="IndiGo / Air India / SpiceJet" />
+        </div>
+
+        <button class="btn" [disabled]="loading">
+          {{ loading ? 'Searching...' : 'Search flights' }}
+        </button>
+      </div>
+
+      <div class="err" *ngIf="error">{{ error }}</div>
+    </form>
+  </div>
+</section>
+

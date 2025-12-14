@@ -1,0 +1,54 @@
+<div class="auth-wrap">
+  <div class="card">
+    <h1>Create account</h1>
+    <p class="sub">Register as user or admin.</p>
+
+    <form (ngSubmit)="submit()" [formGroup]="form">
+      <div class="segmented">
+        <button type="button"
+          [class.active]="form.value.role === 'USER'"
+          (click)="form.patchValue({ role: 'USER' })">User</button>
+
+        <button type="button"
+          [class.active]="form.value.role === 'ADMIN'"
+          (click)="form.patchValue({ role: 'ADMIN' })">Admin</button>
+      </div>
+
+      <div class="grid2">
+        <div>
+          <label>Name</label>
+          <input formControlName="name" placeholder="Full name" />
+        </div>
+
+        <div>
+          <label>Gender</label>
+          <select formControlName="gender">
+            <option>MALE</option>
+            <option>FEMALE</option>
+            <option>OTHER</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Age</label>
+      <input type="number" formControlName="age" />
+
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="you@example.com" />
+
+      <label>Password</label>
+      <input type="password" formControlName="password" placeholder="••••••••" />
+
+      <div class="ok" *ngIf="success">{{ success }}</div>
+      <div class="err" *ngIf="error">{{ error }}</div>
+
+      <button class="btn" [disabled]="loading">
+        {{ loading ? 'Creating...' : 'Register' }}
+      </button>
+
+      <p class="foot">
+        Already have an account? <a routerLink="/login">Login</a>
+      </p>
+    </form>
+  </div>
+</div>

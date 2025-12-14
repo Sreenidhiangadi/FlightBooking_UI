@@ -1,0 +1,34 @@
+<div class="auth-wrap">
+  <div class="card">
+    <h1>Welcome back</h1>
+    <p class="sub">Login to continue booking.</p>
+
+    <form (ngSubmit)="submit()" [formGroup]="form">
+      <div class="segmented">
+        <button type="button"
+          [class.active]="form.value.role === 'USER'"
+          (click)="form.patchValue({ role: 'USER' })">User</button>
+
+        <button type="button"
+          [class.active]="form.value.role === 'ADMIN'"
+          (click)="form.patchValue({ role: 'ADMIN' })">Admin</button>
+      </div>
+
+      <label>Email</label>
+      <input type="email" formControlName="email" placeholder="you@example.com" />
+
+      <label>Password</label>
+      <input type="password" formControlName="password" placeholder="••••••••" />
+
+      <div class="err" *ngIf="error">{{ error }}</div>
+
+      <button class="btn" [disabled]="loading">
+        {{ loading ? 'Logging in...' : 'Login' }}
+      </button>
+
+      <p class="foot">
+        New here? <a routerLink="/register">Create an account</a>
+      </p>
+    </form>
+  </div>
+</div>
