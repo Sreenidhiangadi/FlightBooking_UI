@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
 import { FlightService } from '../../core/services/flight.service';
 import { Flight } from '../../shared/models/flight.model';
@@ -9,16 +8,17 @@ import { Flight } from '../../shared/models/flight.model';
 @Component({
   selector: 'app-flight-search',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './flight-search.html',
   styleUrls: ['./flight-search.css']
 })
 export class FlightSearchComponent {
   loading = false;
+  searched = false;
   error = '';
   flights: Flight[] = [];
 
-  form!: FormGroup;
+  form: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -27,11 +27,14 @@ export class FlightSearchComponent {
     this.form = this.fb.group({
       fromPlace: ['', [Validators.required, Validators.minLength(2)]],
       toPlace: ['', [Validators.required, Validators.minLength(2)]],
-      airline: [''] 
+      airline: ['']
     });
   }
 
   search(): void {
+    console.log('SEARCH CLICKED');
+
+    this.searched = true;
     this.error = '';
     this.flights = [];
 
@@ -40,11 +43,7 @@ export class FlightSearchComponent {
       return;
     }
 
-    const { fromPlace, toPlace, airline } = this.form.value as {
-      fromPlace: string;
-      toPlace: string;
-      airline: string;
-    };
+    const { fromPlace, toPlace, airline } = this.form.value;
 
     this.loading = true;
 
@@ -56,10 +55,11 @@ export class FlightSearchComponent {
       )
       .subscribe({
         next: (res: Flight[]) => {
-          this.loading = false;
+          console.log('FLIGHTS FROM BACKEND:', res);
           this.flights = res;
+          this.loading = false;
         },
-        error: (err: any) => {
+        error: (err) => {
           this.loading = false;
           this.error =
             err?.error || 'Failed to fetch flights. Check gateway route/security.';
