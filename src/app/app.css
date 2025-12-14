@@ -1,20 +1,27 @@
-.page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding: 0 16px; 
-  background: radial-gradient(circle at 10% 10%, rgba(76, 201, 240, 0.18) 0, transparent 100%),
-              radial-gradient(circle at 90% 20%, rgba(124, 58, 237, 0.18) 0, transparent 100%),
-              #f2f7ff;
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden; 
-}
-.auth-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  min-height: 100vh;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
   background: #f2f7ff;
-  padding: 0;         
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Main content below navbar */
+.page {
+  min-height: calc(100vh - 64px);
+  padding: 24px 16px;
+  box-sizing: border-box;
+  background: radial-gradient(
+      circle at 10% 10%,
+      rgba(76, 201, 240, 0.18),
+      transparent
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(124, 58, 237, 0.18),
+      transparent
+    ),
+    #f2f7ff;
 }
