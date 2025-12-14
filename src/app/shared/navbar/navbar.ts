@@ -31,6 +31,6 @@ export class NavbarComponent {
   logout() {
     this.auth.logout();
     this.closeMenu();
-    this.router.navigate(['/flights']);
+    this.router.navigate(['/login']);
   }
 }
