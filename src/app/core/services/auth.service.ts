@@ -7,26 +7,36 @@ import { TokenService } from './token.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private base = environment.apiBaseUrl + '/api';
+  private base = environment.apiBaseUrl + '/user-microservice/api';
 
   constructor(private http: HttpClient, private token: TokenService) {}
 
-  register(user: User, role: 'USER' | 'ADMIN'): Observable<string> {
-    const url = role === 'ADMIN' ? `${this.base}/admin/register` : `${this.base}/user/register`;
-    return this.http.post(url, user, { responseType: 'text' });
-  }
+ register(user: User): Observable<string> {
+  return this.http.post(
+    `${this.base}/user/register`,
+    user,
+    { responseType: 'text' }
+  );
+}
+
 
   login(email: string, password: string, role: 'USER' | 'ADMIN'): Observable<string> {
-    const url = role === 'ADMIN' ? `${this.base}/admin/login` : `${this.base}/user/login`;
+    const url =
+      role === 'ADMIN'
+        ? `${this.base}/admin/login`
+        : `${this.base}/user/login`;
+
     return this.http.post(url, { email, password }, { responseType: 'text' }).pipe(
-      tap((jwt: string) => {
-        this.token.setToken(jwt);
-        this.token.setRole(role);
-      })
+      tap((response: string) => {
+  const jwt = response.replace('token: ', '').trim();
+  this.token.setToken(jwt);
+  this.token.setRole(role);
+})
+
     );
   }
 
-  logout() {
+  logout(): void {
     this.token.logout();
   }
 }
