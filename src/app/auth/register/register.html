@@ -1,53 +1,129 @@
 <div class="auth-wrap">
   <div class="card">
     <h1>Create account</h1>
-    <p class="sub">Register as user or admin.</p>
+    <p class="sub">Fill all details to register</p>
 
-    <form (ngSubmit)="submit()" [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <!-- ROLE -->
       <div class="segmented">
-        <button type="button"
+        <button
+          type="button"
           [class.active]="form.value.role === 'USER'"
-          (click)="form.patchValue({ role: 'USER' })">User</button>
+          (click)="form.get('role')?.markAsTouched(); form.patchValue({ role: 'USER' })">
+          User
+        </button>
 
-        <button type="button"
+        <button
+          type="button"
           [class.active]="form.value.role === 'ADMIN'"
-          (click)="form.patchValue({ role: 'ADMIN' })">Admin</button>
+          (click)="form.get('role')?.markAsTouched(); form.patchValue({ role: 'ADMIN' })">
+          Admin
+        </button>
       </div>
 
-      <div class="grid2">
-        <div>
-          <label>Name</label>
-          <input formControlName="name" placeholder="Full name" />
-        </div>
-
-        <div>
-          <label>Gender</label>
-          <select formControlName="gender">
-            <option>MALE</option>
-            <option>FEMALE</option>
-            <option>OTHER</option>
-          </select>
-        </div>
+      <div
+        class="err"
+        *ngIf="!hasBackendError && form.get('role')?.touched && form.get('role')?.invalid">
+        Please choose a role
       </div>
+
+      <div class="err" *ngIf="backendErrors['role']">
+        {{ backendErrors['role'] }}
+      </div>
+
+     <div class="grid2">
+  <div>
+    <label>Name</label>
+    <input formControlName="name" />
+
+    <div
+      class="err"
+      *ngIf="!hasBackendError && form.get('name')?.touched && form.get('name')?.invalid">
+      Name is required (minimum 2 characters)
+    </div>
+
+    <div class="err" *ngIf="backendErrors['name']">
+      {{ backendErrors['name'] }}
+    </div>
+  </div>
+
+  <div>
+    <label>Gender</label>
+    <select formControlName="gender">
+      <option value="">-- Select gender --</option>
+      <option value="MALE">Male</option>
+      <option value="FEMALE">Female</option>
+      <option value="OTHER">Other</option>
+    </select>
+
+    <div
+      class="err"
+      *ngIf="!hasBackendError && form.get('gender')?.touched && form.get('gender')?.invalid">
+      Please choose a gender
+    </div>
+
+    <div class="err" *ngIf="backendErrors['gender']">
+      {{ backendErrors['gender'] }}
+    </div>
+  </div>
+</div>
 
       <label>Age</label>
       <input type="number" formControlName="age" />
 
+      <div
+        class="err"
+        *ngIf="!hasBackendError && form.get('age')?.touched && form.get('age')?.errors?.['required']">
+        Age is required
+      </div>
+
+      <div
+        class="err"
+        *ngIf="!hasBackendError && form.get('age')?.touched && form.get('age')?.errors?.['min']">
+        Age must be greater than 0
+      </div>
+
+      <div class="err" *ngIf="backendErrors['age']">
+        {{ backendErrors['age'] }}
+      </div>
+
       <label>Email</label>
-      <input type="email" formControlName="email" placeholder="you@example.com" />
+      <input type="email" formControlName="email" />
+
+      <div
+        class="err"
+        *ngIf="!hasBackendError && form.get('email')?.touched && form.get('email')?.invalid">
+        Please enter a valid email
+      </div>
+
+      <div class="err" *ngIf="backendErrors['email']">
+        {{ backendErrors['email'] }}
+      </div>
 
       <label>Password</label>
-      <input type="password" formControlName="password" placeholder="••••••••" />
+      <input type="password" formControlName="password" />
 
-      <div class="ok" *ngIf="success">{{ success }}</div>
+      <div
+        class="err"
+        *ngIf="!hasBackendError && form.get('password')?.touched && form.get('password')?.invalid">
+        Password is required (minimum 4 characters)
+      </div>
+
+      <div class="err" *ngIf="backendErrors['password']">
+        {{ backendErrors['password'] }}
+      </div>
+
       <div class="err" *ngIf="error">{{ error }}</div>
+      <div class="ok" *ngIf="success">{{ success }}</div>
 
-      <button class="btn" [disabled]="loading">
-        {{ loading ? 'Creating...' : 'Register' }}
+      <button class="btn" [disabled]="loading || form.invalid">
+        {{ loading ? 'Registering...' : 'Register' }}
       </button>
 
       <p class="foot">
-        Already have an account? <a routerLink="/login">Login</a>
+        Already have an account?
+        <a routerLink="/login">Login</a>
       </p>
     </form>
   </div>
