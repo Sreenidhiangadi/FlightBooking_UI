@@ -35,6 +35,9 @@ Once the server is running, open your browser and navigate to `http://localhost:
 ---
 ##  Backend Integration
 
+**Backend Repository:** 
+https://github.com/Sreenidhiangadi/FlightBooking_AWT_authentication_Docker
+
 The UI is connected to the backend through an **API Gateway**.
 
 **API Gateway Repository:**  
