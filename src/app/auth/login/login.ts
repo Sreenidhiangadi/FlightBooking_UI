@@ -25,7 +25,7 @@ export class LoginComponent {
     private router: Router
   ) {
     this.form = this.fb.group({
-      role: ['USER', Validators.required],
+      role: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]]
     });
@@ -38,8 +38,7 @@ export class LoginComponent {
       this.form.markAllAsTouched();
       return;
     }
-
-    // cast role as literal type to satisfy AuthService
+    
     const { role, email, password } = this.form.value as {
       role: UserRole;
       email: string;
@@ -53,10 +52,22 @@ export class LoginComponent {
         this.loading = false;
         this.router.navigate(['/flights']);
       },
-      error: (err: any) => {
-        this.loading = false;
-        this.error = err?.error || 'Login failed. Please try again.';
-      }
+     error: (err: any) => {
+  this.loading = false;
+
+  if (typeof err?.error === 'string') {
+    this.error = err.error;
+    return;
+  }
+
+  if (err?.error?.message) {
+    this.error = err.error.message;
+    return;
+  }
+
+  this.error = 'Login failed. Please try again.';
+}
+
     });
   }
 }
