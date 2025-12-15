@@ -1,105 +1,128 @@
-/* Container & card */
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 72px);
+}
+
+/* Container */
 .auth-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: #f2f7ff; /* light blue background */
-  padding: 20px;
-}
-
-.card {
-  background: #ffffff; /* white card */
-  border-radius: 16px;
-  padding: 30px 40px;
+  background: #f2f7ff;
+  padding: 24px;
   width: 100%;
-  max-width: 450px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
+/* Card */
+.card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px 48px;
+  width: 100%;
+  max-width: 560px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Heading */
 h1 {
-  margin-bottom: 8px;
-  font-size: 28px;
+  margin-bottom: 10px;
+  font-size: 34px;
   color: #111827;
 }
 
 .sub {
-  font-size: 14px;
+  font-size: 16px;
   color: #6b7280;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 
-/* Segmented role buttons */
+/* Role selector */
 .segmented {
   display: flex;
-  margin-bottom: 20px;
-  border-radius: 12px;
+  margin-bottom: 24px;
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid #d1d5db;
 }
 
 .segmented button {
   flex: 1;
-  padding: 10px 0;
+  padding: 14px 0;
   background: #f9fafb;
   border: none;
   cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  font-size: 16px;
+  font-weight: 600;
   color: #374151;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .segmented button.active {
   background: #2563eb;
-  color: white;
+  color: #ffffff;
 }
 
-/* Grid for Name + Gender */
+/* Two-column grid */
 .grid2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 15px;
+  gap: 16px;
+  margin-bottom: 18px;
 }
 
 @media (max-width: 520px) {
-  .grid2 { grid-template-columns: 1fr; }
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* Labels & inputs */
+/* Labels */
 label {
   display: block;
-  margin-bottom: 6px;
-  font-size: 14px;
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 500;
   color: #374151;
 }
 
-input, select {
+/* Inputs */
+input,
+select {
   width: 100%;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
   border: 1px solid #d1d5db;
   outline: none;
-  font-size: 14px;
+  font-size: 16px;
   transition: border-color 0.2s ease;
+  box-sizing: border-box;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
   border-color: #2563eb;
 }
 
-/* Buttons */
+/* Button */
 .btn {
   width: 100%;
-  padding: 12px;
-  margin-top: 15px;
+  padding: 14px;
+  margin-top: 18px;
   background: #2563eb;
   color: white;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   cursor: pointer;
   transition: background 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  background: #1d4ed8;
 }
 
 .btn:disabled {
@@ -107,44 +130,53 @@ input:focus, select:focus {
   cursor: not-allowed;
 }
 
-.btn:hover:not(:disabled) {
-  background: #1d4ed8;
-}
-
-/* Success & Error messages */
+/* Messages */
 .ok {
-  margin-top: 12px;
-  padding: 10px 12px;
+  margin-top: 14px;
+  padding: 12px 14px;
   border-radius: 12px;
   background: #d1fae5;
   border: 1px solid #10b981;
   color: #065f46;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .err {
-  margin-top: 12px;
-  padding: 10px 12px;
+  margin-top: 14px;
+  padding: 12px 14px;
   border-radius: 12px;
   background: #fee2e2;
   border: 1px solid #ef4444;
   color: #b91c1c;
-  font-size: 14px;
+  font-size: 15px;
 }
 
-/* Footer link */
+/* Footer */
 .foot {
-  margin-top: 15px;
-  font-size: 13px;
+  margin-top: 20px;
+  font-size: 14px;
   text-align: center;
   color: #6b7280;
 }
 
 .foot a {
   color: #2563eb;
+  font-weight: 500;
   text-decoration: none;
 }
 
 .foot a:hover {
   text-decoration: underline;
+}
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 640px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
 }
