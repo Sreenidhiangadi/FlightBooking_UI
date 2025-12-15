@@ -1,4 +1,8 @@
-/* Hero / search section */
+
+:host {
+  display: block;
+}
+
 .hero {
   display: flex;
   justify-content: center;
@@ -26,7 +30,6 @@
   color: #6b7280;
 }
 
-/* Search form */
 .search .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -89,7 +92,6 @@
   font-size: 14px;
 }
 
-/* Results */
 .results {
   width: 100%;
   max-width: 1000px;
@@ -109,7 +111,6 @@
   }
 }
 
-/* Flight card */
 .flight {
   border-radius: 16px;
   padding: 16px;
@@ -196,4 +197,24 @@
 .seats span {
   color: #2563eb;
   font-weight: 700;
+}
+.state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 40vh;      
+  text-align: center;
+
+  font-size: 1.6rem;  
+  font-weight: 600;
+  color: #444;
+}
+
+.loading {
+  color: #2563eb;    
+}
+
+.empty {
+  color: #6b7280;       
 }

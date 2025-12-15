@@ -18,11 +18,14 @@
 
       <div class="row">
         <div class="field">
-          <label>Airline </label>
-          <input formControlName="airline" placeholder="IndiGo / Air India / SpiceJet" />
+          <label>Airline</label>
+          <input
+            formControlName="airline"
+            placeholder="IndiGo / Air India / SpiceJet"
+          />
         </div>
 
-        <button class="btn" [disabled]="loading">
+        <button type="submit" class="btn" [disabled]="loading">
           {{ loading ? 'Searching...' : 'Search flights' }}
         </button>
       </div>
@@ -32,3 +35,44 @@
   </div>
 </section>
 
+<div class="state loading" *ngIf="loading">
+  Searching flights…
+</div>
+
+<section class="results" *ngIf="searched && !loading && flights.length > 0">
+  <div class="grid">
+    <div class="flight" *ngFor="let f of flights">
+      <div class="top">
+        <div class="airline">{{ f.airline }}</div>
+        <div class="price">₹{{ f.price }}</div>
+      </div>
+
+      <div class="route">
+        <span class="pill">{{ f.fromPlace }}</span>
+        <span class="arrow">→</span>
+        <span class="pill">{{ f.toPlace }}</span>
+      </div>
+
+      <div class="times">
+        <div>
+          <div class="k">Departure</div>
+          <div class="v">{{ f.departureTime | date: 'short' }}</div>
+        </div>
+        <div>
+          <div class="k">Arrival</div>
+          <div class="v">{{ f.arrivalTime | date: 'short' }}</div>
+        </div>
+      </div>
+
+      <div class="bottom">
+        <div class="seats">
+          Seats left: <span>{{ f.availableSeats }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="state empty" *ngIf="searched && !loading && flights.length === 0">
+  No flights found
+</div>
