@@ -2,7 +2,6 @@
   <div class="card">
     <h1>Welcome back</h1>
     <p class="sub">Login to continue booking.</p>
-
     <form (ngSubmit)="submit()" [formGroup]="form">
       <div class="segmented">
         <button type="button"
@@ -13,12 +12,23 @@
           [class.active]="form.value.role === 'ADMIN'"
           (click)="form.patchValue({ role: 'ADMIN' })">Admin</button>
       </div>
-
+<div class="err"
+     *ngIf="form.get('role')?.touched && form.get('role')?.invalid">
+  Please select a role
+</div>
       <label>Email</label>
       <input type="email" formControlName="email" placeholder="you@example.com" />
+<div class="err"
+     *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+  Email is required
+</div>
 
       <label>Password</label>
       <input type="password" formControlName="password" placeholder="••••••••" />
+<div class="err"
+     *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+  Password is required
+</div>
 
       <div class="err" *ngIf="error">{{ error }}</div>
 
