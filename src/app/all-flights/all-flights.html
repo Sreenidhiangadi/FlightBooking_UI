@@ -1,0 +1,22 @@
+<div class="page">
+  <h2>All Flights</h2>
+
+  <p *ngIf="loading">Loading flights...</p>
+  <p *ngIf="error" class="error">{{ error }}</p>
+
+  <div *ngIf="!loading && flights.length === 0">
+    No flights available
+  </div>
+
+  <div class="flight-card" *ngFor="let f of flights">
+    <div>
+      <strong>{{ f.airline }}</strong>
+      <div>{{ f.fromPlace }} → {{ f.toPlace }}</div>
+      <div>{{ f.departureTime | date:'medium' }}</div>
+    </div>
+
+    <div class="price">
+      ₹{{ f.price }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,115 @@
+<div class="booking-container">
+
+  <div class="booking-header">
+    <h2>Review & Book</h2>
+    <p>Please enter traveller details and confirm your booking</p>
+  </div>
+
+  <div class="card">
+    <h3>Trip Details</h3>
+
+    <div class="trip-type">
+      <label>
+        <input
+          type="radio"
+          name="tripType"
+          value="ONE_WAY"
+          [(ngModel)]="tripType"
+        />
+        One Way
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="tripType"
+          value="ROUND_TRIP"
+          [(ngModel)]="tripType"
+        />
+        Round Trip
+      </label>
+    </div>
+
+    <div *ngIf="tripType === 'ROUND_TRIP'" class="field">
+      <label>Return Flight ID</label>
+      <input
+        type="text"
+        placeholder="Enter return flight ID"
+        [(ngModel)]="returnFlightId"
+      />
+    </div>
+  </div>
+
+  <div
+    class="card passenger-card"
+    *ngFor="let p of passengers; let i = index"
+  >
+    <div class="passenger-header">
+      <h3>Traveller {{ i + 1 }}</h3>
+      <button
+        *ngIf="passengers.length > 1"
+        type="button"
+        class="remove-btn"
+        (click)="removePassenger(i)"
+      >
+        Remove
+      </button>
+    </div>
+
+    <div class="grid">
+      <div class="field">
+        <label>Full Name</label>
+        <input
+          type="text"
+          placeholder="Enter full name"
+          [(ngModel)]="p.name"
+        />
+      </div>
+
+      <div class="field">
+        <label>Age</label>
+        <input
+          type="number"
+          placeholder="Age"
+          [(ngModel)]="p.age"
+        />
+      </div>
+
+      <div class="field">
+        <label>Gender</label>
+        <select [(ngModel)]="p.gender">
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Seat Number</label>
+        <input
+          type="text"
+          placeholder="e.g. 12A"
+          [(ngModel)]="p.seatNumber"
+        />
+      </div>
+    </div>
+  </div>
+
+  <button class="add-passenger" type="button" (click)="addPassenger()">
+    + Add another traveller
+  </button>
+
+  <div class="booking-footer">
+    <button
+      class="confirm-btn"
+      type="button"
+      (click)="confirmBooking()"
+      [disabled]="isBooking"
+    >
+      {{ isBooking ? 'Booking…' : 'Confirm Booking' }}
+    </button>
+  </div>
+
+  <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+</div>
