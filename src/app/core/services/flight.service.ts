@@ -22,4 +22,16 @@ export class FlightService {
       { fromPlace, toPlace, airline }
     );
   }
+   search(fromPlace: string, toPlace: string, date: string): Observable<Flight[]> {
+    return this.http.post<Flight[]>(
+      `${this.base}/search`,
+      { fromPlace, toPlace, date }
+    );
+  }
+  getAllFlights() {
+  return this.http.get<Flight[]>(
+    `${this.base}/getallflights`
+  );
+}
+
 }
