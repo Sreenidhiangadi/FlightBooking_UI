@@ -8,8 +8,8 @@
   <div class="brand" routerLink="/flights">FlyHigh</div>
 
 <div class="right">
+  <a class="ghost" routerLink="">Home</a>
   <a class="ghost" routerLink="/flights">Search</a>
-
   <ng-container *ngIf="!token.isLoggedIn()">
     <a class="ghost" routerLink="/login">Login</a>
     <a class="ghost" routerLink="/register">Register</a>
@@ -34,6 +34,9 @@
   </div>
 
   <a routerLink="/flights" (click)="closeMenu()">Flight Search</a>
+<a routerLink="/all-flights" (click)="closeMenu()">
+  All Flights
+</a>
 
   <ng-container *ngIf="!token.isLoggedIn()">
     <a routerLink="/login" (click)="closeMenu()">Login</a>
