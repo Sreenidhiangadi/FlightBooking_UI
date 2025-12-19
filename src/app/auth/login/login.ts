@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
-
+import { ChangeDetectorRef } from '@angular/core';
 type UserRole = 'USER' | 'ADMIN';
 
 @Component({
@@ -20,9 +20,11 @@ export class LoginComponent {
   form!: FormGroup;
 
   constructor(
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.form = this.fb.group({
       role: ['', Validators.required],
@@ -46,11 +48,13 @@ export class LoginComponent {
     };
 
     this.loading = true;
-
+const redirectTo =
+  this.route.snapshot.queryParamMap.get('redirectTo') || '/flights';
     this.auth.login(email, password, role).subscribe({
       next: () => {
         this.loading = false;
-        this.router.navigate(['/flights']);
+        this.router.navigateByUrl(redirectTo);
+        this.cdr.detectChanges();
       },
      error: (err: any) => {
   this.loading = false;
