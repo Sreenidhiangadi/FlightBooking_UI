@@ -8,10 +8,9 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Main content below navbar */
 .page {
   min-height: calc(100vh - 64px);
-  padding: 24px 16px;
+  /* padding: 24px 16px; */
   box-sizing: border-box;
   background: radial-gradient(
       circle at 10% 10%,
