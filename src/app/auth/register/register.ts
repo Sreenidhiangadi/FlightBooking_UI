@@ -3,7 +3,7 @@ import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angula
 import { AuthService } from '../../core/services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -21,7 +21,8 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.form = this.fb.group({
       role: ['', Validators.required],
@@ -53,6 +54,7 @@ submit(): void {
       this.loading = false;
       this.success = msg || 'Registered successfully. You can login now.';
       setTimeout(() => this.router.navigate(['/login']), 700);
+      this.cdr.detectChanges();
     },
      error: (err) => {
   this.loading = false;
