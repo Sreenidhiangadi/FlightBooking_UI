@@ -1,0 +1,51 @@
+<div class="history-wrapper">
+  <h2>My Bookings</h2>
+
+  <p *ngIf="!loading && bookings.length === 0">
+    No bookings found.
+  </p>
+
+  <div *ngFor="let booking of bookings" class="booking-card">
+    <div><b>PNR:</b> {{ booking.pnr }}</div>
+    <div><b>Trip:</b> {{ booking.tripType }}</div>
+    <div><b>Departure:</b> {{ booking.departureTime | date:'medium' }}</div>
+    <div><b>Total:</b> ₹{{ booking.totalPrice }}</div>
+
+    <span *ngIf="booking.canceled" class="pill canceled">
+      Cancelled
+    </span>
+
+    <h4>Passengers</h4>
+    <div *ngFor="let p of booking.passengers">
+      {{ p.name }} — Seat {{ p.seatNumber }}
+    </div>
+
+    <button
+      *ngIf="canShowCancel(booking)"
+      (click)="openCancelPopup(booking)"
+      [disabled]="booking.canceling"
+      class="cancel-btn">
+      Cancel Booking
+    </button>
+
+    <p class="status error" *ngIf="booking.cancelMessage">
+      {{ booking.cancelMessage }}
+    </p>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="showCancelPopup">
+  <div class="modal">
+    <h3>Cancel Booking</h3>
+
+    <p>
+      Are you sure you want to cancel ticket
+      <b>{{ selectedBooking?.pnr }}</b>?
+    </p>
+
+    <div class="modal-actions">
+      <button class="btn no" (click)="closeCancelPopup()">No</button>
+      <button class="btn yes" (click)="confirmCancel()">Yes</button>
+    </div>
+  </div>
+</div>
