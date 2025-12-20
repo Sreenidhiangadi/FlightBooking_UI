@@ -14,7 +14,19 @@
     <a class="ghost" routerLink="/login">Login</a>
     <a class="ghost" routerLink="/register">Register</a>
   </ng-container>
+  <!-- <a
+  class="ghost"
+  *ngIf="token.isLoggedIn()"
+  routerLink="/my-bookings">
+  My Bookings
+</a> -->
 
+  <a
+  class="ghost"
+  *ngIf="token.isLoggedIn()"
+  routerLink="/profile">
+  Profile
+</a>
   <button
     class="primary"
     *ngIf="token.isLoggedIn()"
@@ -45,6 +57,8 @@
 
   <ng-container *ngIf="token.isLoggedIn()">
     <div class="pill">Role: {{ token.getRole() }}</div>
+    <a routerLink="/my-bookings" (click)="closeMenu()">My Bookings</a>
+    <a routerLink="/profile" (click)="closeMenu()">Profile</a>
     <button class="logout" (click)="logout()">Logout</button>
   </ng-container>
 </nav>
