@@ -42,4 +42,10 @@ export class BookingService {
       { responseType: 'text' }
     );
   }
+  getTicketByPnr(pnr: string) {
+  return this.http.get(
+    `${this.base}/ticket/${pnr}`
+  );
+}
+
 }

@@ -33,5 +33,11 @@ export class FlightService {
     `${this.base}/getallflights`
   );
 }
+getFlightById(id: string): Observable<Flight> {
+  return this.http.get<Flight>(
+    `${this.base}/${id}`
+  );
+}
+
 
 }

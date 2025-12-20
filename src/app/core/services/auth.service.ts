@@ -57,4 +57,8 @@ export class AuthService {
   getRole(): string | null {
     return localStorage.getItem('role');
   }
+  getProfile(): Observable<any> {
+  return this.http.get(`${this.base}/me`);
+}
+
 }
