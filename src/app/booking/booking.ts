@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 import { BookingService } from '../core/services/booking.services';
 import { Passenger, TripType } from '../shared/models/booking.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking',
@@ -33,19 +34,21 @@ export class Booking implements OnInit {
   successMessage = '';
   errorMessage = '';
   isBooking = false;
-  private lastBookingSignature?: string;
   constructor(
     private route: ActivatedRoute,
     private bookingService: BookingService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('flightId');
-    if (id) {
-      this.flightId = id;
-    }
+ ngOnInit(): void {
+  const id = this.route.snapshot.paramMap.get('flightId');
+  if (id) {
+    this.flightId = id;
+    this.errorMessage = '';
   }
+}
+
 
   addPassenger(): void {
     this.passengers.push({
@@ -77,15 +80,9 @@ export class Booking implements OnInit {
 confirmBooking(): void {
   if (this.isBooking) return;
 
-  const currentSignature = this.getBookingSignature();
-
-  if (this.lastBookingSignature === currentSignature) {
-    this.errorMessage = 'This booking was already completed.';
-    return;
-  }
+ 
 
   this.isBooking = true;
-  this.successMessage = '';
   this.errorMessage = '';
 
   this.bookingService
@@ -96,14 +93,29 @@ confirmBooking(): void {
       this.tripType === 'ROUND_TRIP' ? this.returnFlightId : undefined
     )
     .subscribe({
-      next: res => {
-        this.successMessage = res;
+      next: (res: any) => {
 
-        this.lastBookingSignature = currentSignature;
+  let pnr: string | null = null;
 
-        this.isBooking = false;
-        this.cdr.detectChanges();
-      },
+  if (typeof res === 'string') {
+    pnr = res.replace('PNR:', '').trim();
+  }
+  if (!pnr && res?.pnr) {
+    pnr = res.pnr;
+  }
+
+  if (!pnr) {
+    this.errorMessage = 'Booking completed but PNR not found';
+    this.isBooking = false;
+    return;
+  }
+
+  
+  this.isBooking = false;
+
+  this.router.navigate(['/ticket', pnr]);
+}
+,
       error: (err: HttpErrorResponse) => {
         this.errorMessage =
           err.error?.message ||
@@ -118,3 +130,5 @@ confirmBooking(): void {
 
 
 }
+
+
