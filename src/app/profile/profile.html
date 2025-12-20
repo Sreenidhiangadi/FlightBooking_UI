@@ -1,0 +1,45 @@
+<div class="profile-wrapper">
+
+  <div *ngIf="loading" class="status">
+    Loading profile...
+  </div>
+
+  <div *ngIf="error" class="status error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="user" class="profile-card">
+
+    <h2>My Profile</h2>
+
+    <div class="row">
+      <span>Name</span>
+      <strong>{{ user.name }}</strong>
+    </div>
+
+    <div class="row">
+      <span>Email</span>
+      <strong>{{ user.email }}</strong>
+    </div>
+
+    <div class="row">
+      <span>Role</span>
+      <strong>{{ user.role }}</strong>
+    </div>
+
+    <div class="actions">
+      <button class="secondary" routerLink="/flights">
+        Back to Flights
+      </button>
+       <button type="button" routerLink="/my-bookings">
+          My Bookings
+        </button>
+
+      <button class="danger" (click)="logout()">
+        Logout
+      </button>
+    </div>
+
+  </div>
+
+</div>
