@@ -16,14 +16,32 @@ export const routes: Routes = [
     import('./all-flights/all-flights')
       .then(m => m.AllFlightsComponent)
 },
-
-  {path: 'booking/:flightId',
+{
+  path: 'ticket/:pnr',
+  loadComponent: () =>
+    import('./ticket/ticket')
+      .then(m => m.TicketComponent)
+},
+{
+  path: 'profile',
+  canActivate: [authGuard],
+  loadComponent: () =>
+    import('./profile/profile')
+      .then(m => m.ProfileComponent)
+},
+{   path: 'booking/:flightId',
     loadComponent: () =>
       import('./booking/booking').then(m => m.Booking),
     canActivate: [authGuard]
   },
-
-  { path: '**', redirectTo: 'flights' } 
+{
+  path: 'my-bookings',
+  canActivate: [authGuard],
+  loadComponent: () =>
+    import('./booking-history/booking-history')
+      .then(m => m.BookingHistoryComponent)
+},
+{ path: '**', redirectTo: 'flights' } 
 ];
 
 
