@@ -99,6 +99,7 @@ This ensures smooth frontend–backend interaction while maintaining security.
 - Register Page
 - Flight Search Page
 - Navigation Drawer (Hamburger Menu)
+- Add flight
 
 ---
 ##  Screenshots
