@@ -1,11 +1,12 @@
-#  Flight Booking Application – Frontend (Angular)
+# Flight Booking Application – Frontend (Angular)
 
-A modern **Angular-based frontend** for a microservices-driven **Flight Booking Application**, providing user-friendly interfaces for authentication, flight search, and booking workflows.
+A modern **Angular-based frontend** for a microservices-driven **Flight Booking Application**, designed to deliver smooth authentication, flight discovery, booking, and management workflows.
 
-The frontend communicates securely with backend microservices via an **API Gateway**.
+The frontend communicates securely with backend microservices via an **API Gateway**, following real-world enterprise architecture.
 
 ---
-## Development server
+
+## Development Server
 
 To start a local development server, run:
 
@@ -13,16 +14,25 @@ To start a local development server, run:
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Once the server is running, open your browser and navigate to:
+
+```
+http://localhost:4200/
+```
+
+The application reloads automatically on source code changes.
 
 ---
-##  Tech Stack
+
+## Tech Stack
 
 ### Frontend
 - Angular (Standalone Components)
 - TypeScript
 - Reactive Forms
 - Angular Router
+- Route Guards
+- HTTP Interceptors
 - CSS (Custom Styling)
 
 ### Backend (via API Gateway)
@@ -33,93 +43,164 @@ Once the server is running, open your browser and navigate to `http://localhost:
 - Docker and Docker Compose
 
 ---
-##  Backend Integration
 
-**Backend Repository:** 
+## Backend Integration
+
+**Backend Repository:**  
 https://github.com/Sreenidhiangadi/FlightBooking_AWT_authentication_Docker
-
-The UI is connected to the backend through an **API Gateway**.
 
 **API Gateway Repository:**  
 https://github.com/Sreenidhiangadi/FlightBooking_AWT_authentication_Docker/tree/main/API_Gateway_Microservices_security
 
-All requests from the UI are routed through the API Gateway, which handles:
+All frontend requests are routed through the **API Gateway**, which provides:
 
-- Authentication and Authorization (JWT)
-- Service routing
-- Security enforcement
----
-
-##  CORS Configuration
-
-Cross-Origin Resource Sharing (CORS) is enabled to allow secure communication between the Angular frontend and backend microservices.
-
-- Frontend runs on a different origin (Angular)
-- Backend services are accessed through the API Gateway
-- CORS is configured at the API Gateway level
-- Only required HTTP methods and headers are allowed
-
-This ensures smooth frontend–backend interaction while maintaining security.
+- JWT-based Authentication and Authorization
+- Centralized Security
+- Service Routing and Load Balancing
+- CORS Handling
 
 ---
 
+## CORS Configuration
 
+Cross-Origin Resource Sharing (CORS) is configured at the **API Gateway level**.
 
-##  Features
+- Frontend runs on a separate origin (Angular)
+- Backend services are accessed only via API Gateway
+- Allowed origins, headers, and HTTP methods are restricted
+- JWT headers are explicitly permitted
 
+This ensures secure and controlled frontend–backend communication.
 
-###  Registration
+---
+
+## Features
+
+### Authentication & Authorization
+- User and Admin login
+- Secure JWT token handling
+- Token stored using browser storage
+- Auto logout on token expiration
+- Role-based access control
+
+### Registration
 - User and Admin registration
-- Frontend and backend validation
-- Duplicate user handling (User already exists)
-- Field-level error display
+- Frontend and backend validations
+- Duplicate user detection
+- Inline form error messages
 
 #### Validation Rules
-- Name: minimum 2 characters  
-- Age: must be greater than 0  
-- Email: valid email format  
-- Password: minimum 4 characters  
-
-###  Flight Search
-- Search flights by route and airline
-- Real-time results from backend
-- Clean card-based UI for results
-
-###  Responsive UI
-- Mobile-friendly layout
-- Hamburger menu (navigation drawer)
-- Smooth user experience for forms and navigation
+- Name: minimum 2 characters
+- Age: must be greater than 0
+- Email: valid email format
+- Password: minimum 4 characters
 
 ---
 
-##  Application Pages
+### Flight Search
+- Search flights by:
+  - Source
+  - Destination
+  - Airline
+- Real-time search results
+- Responsive card-based result display
+
+---
+
+### Flight Booking 
+- Book flights directly from search results
+- Seat availability validation
+- Booking confirmation flow
+- Backend-integrated reservation logic
+
+---
+
+### Booking History 
+- View all booked flights
+- Booking details with flight information
+- User-specific booking records
+
+---
+
+### Admin Features 
+- Add new flights
+- Update existing flight details
+- Delete flights
+- View all flights in inventory
+- Manage airline schedules
+
+---
+
+### Security Enhancements
+- Route Guards for protected pages
+- Admin-only access for management screens
+- HTTP Interceptor for attaching JWT token
+- Unauthorized access redirection
+
+---
+
+### UI & UX Improvements
+- Fully responsive layout
+- Hamburger menu (navigation drawer)
+- Conditional menu items based on login state
+- Clean and consistent design system
+- Improved form usability and feedback
+
+---
+
+## Application Pages
 
 - Home Page
-- Login Page (User/Admin)
+- Login Page (User / Admin)
 - Register Page
 - Flight Search Page
+- Booking Confirmation Page
+- Booking History Page
+- Admin Dashboard
 - Navigation Drawer (Hamburger Menu)
 - Add flight
+- Add inventory(RBAC)
+- Manage inventory
+- Password Change
+
 
 ---
-##  Screenshots
+
+## Screenshots
 
 ### Home Page
-<img width="1090" height="573" alt="image" src="https://github.com/user-attachments/assets/ae7ce45d-3817-42bd-9fbc-6d99261b8278" />
+<img width="1090" height="573" alt="Home Page" src="https://github.com/user-attachments/assets/ae7ce45d-3817-42bd-9fbc-6d99261b8278" />
 <br><br>
 
 ### Login Page
-<img width="940" height="478" alt="image" src="https://github.com/user-attachments/assets/e45a4180-dcf5-4563-991f-ba40c9784d91" />
+<img width="940" height="478" alt="Login Page" src="https://github.com/user-attachments/assets/e45a4180-dcf5-4563-991f-ba40c9784d91" />
 <br><br>
 
 ### Register Page
-<img width="1059" height="601" alt="image" src="https://github.com/user-attachments/assets/221c4b72-34e1-4f2b-b537-7c47b77ef9a4" />
+<img width="1059" height="601" alt="Register Page" src="https://github.com/user-attachments/assets/221c4b72-34e1-4f2b-b537-7c47b77ef9a4" />
 <br><br>
 
 ### Flight Search Page
-<img width="1090" height="552" alt="image" src="https://github.com/user-attachments/assets/60f3a215-a6d3-48a1-ba1b-19e4c7416cd0" />
-
+<img width="1090" height="552" alt="Flight Search Page" src="https://github.com/user-attachments/assets/60f3a215-a6d3-48a1-ba1b-19e4c7416cd0" />
 
 ---
 
+## Architecture Overview
 
+- Angular frontend (SPA)
+- API Gateway as single entry point
+- Microservices for:
+  - Authentication
+  - Flight Management
+  - Booking
+- Service Discovery via Eureka
+- Centralized configuration via Config Server
+- Dockerized deployment
+
+---
+
+## Summary
+
+This project demonstrates a **production-grade Angular frontend** integrated with a **secure Spring Boot microservices backend**, following best practices in authentication, authorization, UI design, and scalability.
+
+---
