@@ -53,12 +53,29 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
+  getRole(): 'USER' | 'ADMIN' | null {
+    return localStorage.getItem('role') as any;
+  }
 
-  getRole(): string | null {
-    return localStorage.getItem('role');
+  isAdmin(): boolean {
+    return this.getRole() === 'ADMIN';
+  }
+
+  isUser(): boolean {
+    return this.getRole() === 'USER';
   }
   getProfile(): Observable<any> {
   return this.http.get(`${this.base}/me`);
 }
+changePassword(payload: {
+  currentPassword: string;
+  newPassword: string;
+}): Observable<any> {
+  return this.http.put(
+    `${this.base}/user/change-password`,
+    payload
+  );
+}
 
+  
 }

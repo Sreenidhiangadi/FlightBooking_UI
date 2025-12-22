@@ -4,6 +4,7 @@ import { LoginComponent } from './auth/login/login';
 import { RegisterComponent } from './auth/register/register';
 import { HomeComponent } from './home/home';
 import { authGuard } from './core/guards/auth-guard';
+import { adminGuard } from './core/guards/admin-guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -40,6 +41,31 @@ export const routes: Routes = [
   loadComponent: () =>
     import('./booking-history/booking-history')
       .then(m => m.BookingHistoryComponent)
+},
+{
+  path: 'admin',
+  canActivate: [authGuard, adminGuard],
+  children: [
+    {
+      path: 'add-flight',
+      loadComponent: () =>
+        import('./add-flight/add-flight')
+          .then(m => m.AddFlight)
+    },
+    {
+      path: 'manage-flights',
+      loadComponent: () =>
+        import('./manage-flights/manage-flights')
+          .then(m => m.ManageFlightsComponent)
+    }
+  ]
+},
+{
+  path: 'change-password',
+  canActivate: [authGuard],
+  loadComponent: () =>
+    import('./change-password/change-password')
+      .then(m => m.ChangePasswordComponent)
 },
 { path: '**', redirectTo: 'flights' } 
 ];

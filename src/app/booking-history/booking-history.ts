@@ -51,6 +51,10 @@ export class BookingHistoryComponent implements OnInit {
 
       if (flight) {
         booking.departureTime = flight.departureTime;
+        this.bookings.sort((a, b) =>
+        new Date(b.departureTime || 0).getTime() -
+        new Date(a.departureTime || 0).getTime()
+      );
         this.cdr.detectChanges();
       }
     });
