@@ -28,12 +28,16 @@
     </div>
 
     <div class="actions">
-      <button class="secondary" routerLink="/flights">
-        Back to Flights
+       <button
+  *ngIf="user.role === 'USER'"
+  type="button"
+  routerLink="/my-bookings">
+  My Bookings
+</button>
+
+     <button type="button" routerLink="/change-password">
+        Change Password
       </button>
-       <button type="button" routerLink="/my-bookings">
-          My Bookings
-        </button>
 
       <button class="danger" (click)="logout()">
         Logout
