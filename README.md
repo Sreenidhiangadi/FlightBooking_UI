@@ -182,6 +182,31 @@ This ensures secure and controlled frontend–backend communication.
 
 ### Flight Search Page
 <img width="1090" height="552" alt="Flight Search Page" src="https://github.com/user-attachments/assets/60f3a215-a6d3-48a1-ba1b-19e4c7416cd0" />
+<br><br>
+
+### Add inventory
+<img width="1211" height="588" alt="image" src="https://github.com/user-attachments/assets/6ebf6c4e-8696-4496-ba9c-719e8447b9e7" />
+<br><br>
+
+### RBAC
+<img width="1132" height="587" alt="image" src="https://github.com/user-attachments/assets/366dceb1-616e-4a58-bb74-090e4de14dbb" />
+<br><br>
+
+### Manage Flights
+<img width="1198" height="529" alt="image" src="https://github.com/user-attachments/assets/e4957d17-c2b8-4e38-a356-988e1f5863f6" />
+<br><br>
+
+### Delete Flight
+<img width="1176" height="670" alt="image" src="https://github.com/user-attachments/assets/1ece3956-5991-49af-ba56-0af5552fc7c4" />
+<br><br>
+
+### Change Password
+<img width="1091" height="546" alt="image" src="https://github.com/user-attachments/assets/29435689-fa45-4264-bd29-8804d4f54120" />
+<br><br>
+
+
+
+
 
 ---
 
