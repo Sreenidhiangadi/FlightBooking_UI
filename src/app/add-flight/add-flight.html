@@ -1,0 +1,102 @@
+<div class="page">
+  <div class="card">
+    <h2>Add Inventory</h2>
+
+    <form #f="ngForm" (ngSubmit)="addFlight(f)">
+
+      <div class="field">
+        <label>Airline</label>
+        <input
+          name="airline"
+          list="airlines"
+          [(ngModel)]="flight.airline"
+          required
+        />
+        <datalist id="airlines">
+          <option *ngFor="let airline of airlines" [value]="airline"></option>
+        </datalist>
+      </div>
+
+      <div class="field">
+        <label>From</label>
+        <input
+          name="fromPlace"
+          list="fromPlaces"
+          [(ngModel)]="flight.fromPlace"
+          required
+        />
+        <datalist id="fromPlaces">
+          <option *ngFor="let city of places" [value]="city"></option>
+        </datalist>
+      </div>
+
+      <div class="field">
+        <label>To</label>
+        <input
+          name="toPlace"
+          list="toPlaces"
+          [(ngModel)]="flight.toPlace"
+          required
+        />
+        <datalist id="toPlaces">
+          <option *ngFor="let city of places" [value]="city"></option>
+        </datalist>
+      </div>
+
+      <div class="field">
+        <label>Departure Time</label>
+        <input
+          type="datetime-local"
+          name="departureTime"
+          [(ngModel)]="flight.departureTime"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label>Arrival Time</label>
+        <input
+          type="datetime-local"
+          name="arrivalTime"
+          [(ngModel)]="flight.arrivalTime"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label>Price</label>
+        <input
+          type="number"
+          name="price"
+          [(ngModel)]="flight.price"
+          min="1"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label>Total Seats</label>
+        <input
+          type="number"
+          name="totalSeats"
+          [(ngModel)]="flight.totalSeats"
+          min="1"
+          required
+        />
+      </div>
+
+      <button type="submit" [disabled]="loading">
+        {{ loading ? 'Adding...' : 'Add Flight' }}
+      </button>
+
+    </form>
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </div>
+</div>
+<div class="popup-backdrop" *ngIf="showSuccessPopup">
+  <div class="popup">
+    <h3>Success</h3>
+    <p>{{ successMessage }}</p>
+  </div>
+</div>
