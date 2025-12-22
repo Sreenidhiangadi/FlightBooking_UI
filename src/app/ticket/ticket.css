@@ -1,0 +1,90 @@
+.ticket-card {
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #222;
+}
+
+.ticket-card h2 {
+  margin-bottom: 16px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.pnr {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.flight {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 10px;
+  column-gap: 16px;
+  margin-bottom: 20px;
+}
+
+.flight div {
+  font-size: 15px;
+}
+
+.passengers h4 {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.passenger {
+  padding: 12px;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background: #fafafa;
+}
+
+.passenger div {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.booking {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 10px;
+  column-gap: 16px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.price {
+  text-align: right;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+hr {
+  border: none;
+  border-top: 1px dashed #ddd;
+  margin: 20px 0;
+}
+
+.error {
+  color: #d32f2f;
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .flight,
+  .booking {
+    grid-template-columns: 1fr;
+  }
+
+  .price {
+    text-align: left;
+  }
+}

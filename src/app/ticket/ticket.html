@@ -1,0 +1,30 @@
+<div *ngIf="loading">Loading ticket...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div class="ticket-card" *ngIf="ticket">
+  <h2>Ticket Confirmed</h2>
+
+  <div class="pnr">
+    PNR: <strong>{{ ticket.pnr }}</strong>
+  </div>
+
+  <div class="flight">
+    <div>{{ ticket.airline }}</div>
+    <div>{{ ticket.fromPlace }} → {{ ticket.toPlace }}</div>
+    <div>{{ ticket.departureTime | date:'medium' }}</div>
+  </div>
+
+  <div class="passengers">
+    <h4>Passengers</h4>
+    <div *ngFor="let p of ticket.passengers">
+      {{ p.name }} ({{ p.age }})
+    </div>
+    <div *ngIf="ticket.mealType">
+  Meal Type: {{ ticket.mealType }}
+</div>
+  </div>
+
+  <div class="price">
+    Total Paid: ₹{{ ticket.totalPrice }}
+  </div>
+</div>
