@@ -158,9 +158,11 @@ This ensures secure and controlled frontend–backend communication.
 - Booking History Page
 - Admin Dashboard
 - Navigation Drawer (Hamburger Menu)
+- Add flight
 - Add inventory(RBAC)
 - Manage inventory
 - Password Change
+
 
 ---
 
