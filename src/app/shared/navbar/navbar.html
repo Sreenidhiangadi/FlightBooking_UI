@@ -14,27 +14,10 @@
     <a class="ghost" routerLink="/login">Login</a>
     <a class="ghost" routerLink="/register">Register</a>
   </ng-container>
-  <!-- <a
-  class="ghost"
-  *ngIf="token.isLoggedIn()"
-  routerLink="/my-bookings">
-  My Bookings
-</a> -->
-
-  <a
-  class="ghost"
-  *ngIf="token.isLoggedIn()"
-  routerLink="/profile">
-  Profile
-</a>
-  <button
-    class="primary"
-    *ngIf="token.isLoggedIn()"
-    (click)="logout()">
-    Logout
-  </button>
+<ng-container *ngIf="token.isLoggedIn()">
+      <a class="ghost" routerLink="/profile">Profile</a>
+    </ng-container>
 </div>
-
 </header>
 
 <div class="backdrop" *ngIf="menuOpen" (click)="closeMenu()"></div>
@@ -49,16 +32,19 @@
 <a routerLink="/all-flights" (click)="closeMenu()">
   All Flights
 </a>
-
+<ng-container *ngIf="isUser">
+    <a routerLink="/my-bookings" (click)="closeMenu()">My Bookings</a>
+  </ng-container>
+  <ng-container *ngIf="isAdmin">
+    <a routerLink="/admin/add-flight" (click)="closeMenu()">Add Inventory</a>
+    <a routerLink="/admin/manage-flights" (click)="closeMenu()">Manage Inventory</a>
+    <button class="danger" (click)="logout()">
+        Logout
+      </button>
+  </ng-container>
   <ng-container *ngIf="!token.isLoggedIn()">
     <a routerLink="/login" (click)="closeMenu()">Login</a>
     <a routerLink="/register" (click)="closeMenu()">Register</a>
   </ng-container>
 
-  <ng-container *ngIf="token.isLoggedIn()">
-    <div class="pill">Role: {{ token.getRole() }}</div>
-    <a routerLink="/my-bookings" (click)="closeMenu()">My Bookings</a>
-    <a routerLink="/profile" (click)="closeMenu()">Profile</a>
-    <button class="logout" (click)="logout()">Logout</button>
-  </ng-container>
 </nav>

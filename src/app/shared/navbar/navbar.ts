@@ -33,4 +33,11 @@ export class NavbarComponent {
     this.closeMenu();
     this.router.navigate(['/login']);
   }
+   get isAdmin(): boolean {
+    return this.auth.isAdmin();
+  }
+
+  get isUser(): boolean {
+    return this.auth.isUser();
+  }
 }
