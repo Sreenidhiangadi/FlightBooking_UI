@@ -1,0 +1,48 @@
+<h2>Manage Flights</h2>
+
+<div class="success-banner" *ngIf="showSuccess">
+  {{ successMessage }}
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>From</th>
+      <th>To</th>
+      <th>Arrival Time</th>
+      <th>Departure Time</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let f of flights">
+      <td>{{ f.fromPlace }}</td>
+      <td>{{ f.toPlace }}</td>
+      <td>{{ f.arrivalTime }}</td>
+      <td>{{ f.departureTime }}</td>
+      <td class="actions">
+        <button (click)="editFlight(f.id)">Edit</button>
+        <button class="danger" (click)="deleteFlight(f.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal-backdrop" *ngIf="showDeleteModal">
+  <div class="modal">
+    <h3>Confirm Delete</h3>
+    <p>Are you sure you want to delete this flight?</p>
+
+    <div class="modal-actions">
+      <button class="danger" (click)="confirmDelete()">Delete</button>
+      <button (click)="cancelDelete()">Cancel</button>
+    </div>
+  </div>
+</div>
+<div class="popup-backdrop" *ngIf="showSuccess">
+  <div class="popup">
+    <h3>Success</h3>
+    <p>{{ successMessage }}</p>
+  </div>
+</div>
